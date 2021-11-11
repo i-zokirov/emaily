@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines":{
+    "node": "13.12.0",
+    "npm": "6.14.4"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ikboljon Zokirov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
