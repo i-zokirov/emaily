@@ -1,4 +1,6 @@
-require('dotenv').config();
+if(!process.env.NODE_ENV !== "production"){
+    require('dotenv').config();
+}
 
 const express = require('express');
 const mongoose = require('mongoose')
@@ -24,10 +26,11 @@ mongoose.connect(MONGO_DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}
         console.log(err)
     })
 
-
+// ***** Middleware section ***** //
 // cookie configuration
 app.use(
     cookieSession({
+        name: "emaily-beckenf-auth-session",
         maxAge: 24 * 60 * 60 * 1000,
         keys: [COOKIE_KEY]
     })
@@ -35,6 +38,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session())
+
+// ***** Middleware section end ***** //
 
 // routes
 const authRoutes = require('./routes/authRoutes')
