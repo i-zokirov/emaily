@@ -6,12 +6,12 @@ module.exports = (app) => {
     }));
 
     app.get('/auth/google/callback', passport.authenticate('google'), (req, res)=>{
-        res.redirect('/api/current_user')
+        res.redirect('/surveys')
     });
 
     app.get('/api/logout', (req, res)=>{
         req.logout()
-        res.send('Successfully logged out!')
+        res.redirect('/')
     })
 
     app.get('/api/current_user', (req, res)=>{

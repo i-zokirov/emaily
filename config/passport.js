@@ -27,27 +27,20 @@ passport.use(
         clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: '/auth/google/callback',
         proxy: true
-    }, (accessToken, refreshToken, profile, done) => {
-        User.findOne({googleId: profile.id})
-            .then((existingUser)=>{
-               if(existingUser){
-                    // user alreadys exists in DB
-                    done(null, existingUser) // => proceed with authentication with existing user record
-               }else{
-                    //user does not exist in DB    
-                    new User({
-                        googleId: profile.id,
-                        first_name: profile.name.givenName,
-                        last_name: profile.name.familyName,
-                        email: profile.emails[0].value
-                    })
-                        .save()
-                        .then((user)=> done(null, user)) // => proceed with authentication with new user record
-               } 
-            }).catch((e)=>{
-                done(e) //=> proceed with the error occured
-            })
-        
-        
+    }, async(accessToken, refreshToken, profile, done) => {
+        const existingUser = await User.findOne({googleId: profile.id})
+        if(existingUser){
+            // user alreadys exists in DB
+            return done(null, existingUser) // => proceed with authentication with existing user record
+        }
+         //user does not exist in DB    
+        const newUser = new User({
+        googleId: profile.id,
+        first_name: profile.name.givenName,
+        last_name: profile.name.familyName,
+        email: profile.emails[0].value
+        })
+        await newUser.save()
+        done(null, newUser) // => proceed with authentication with new user record
     })
 );
