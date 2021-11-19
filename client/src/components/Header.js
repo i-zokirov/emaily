@@ -20,6 +20,9 @@ class Header extends React.Component{
                 return (
                     <ul className="right">
                         <li>
+                            <Link className="waves-effect waves-light btn" to="/surveys">Dahboard</Link>
+                        </li>
+                        <li>
                             <Payments/>
                         </li>
                         <li>
@@ -34,11 +37,11 @@ class Header extends React.Component{
     }
     
     render(){
-        const logoUrl = this.props.auth ? "/surveys" : "/"
+        
         return(
             <nav>
                 <div className="nav-wrapper">
-                    <Link to={logoUrl} style={{marginLeft: "10px"}} className="left brand-logo">
+                    <Link to="/" style={{marginLeft: "10px"}} className="left brand-logo">
                         Emaily
                     </Link>
                     {this.renderActionButtons()}

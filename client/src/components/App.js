@@ -6,8 +6,8 @@ import * as actions from "../actions";
 
 import Header from "./Header";
 import LandingPage from "./LandingPage";
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
+import Dashboard from "./Dashboard";
+import SurveyNew from "./surveys/SurveyNew";
 
 
 class App extends React.Component{
@@ -21,11 +21,11 @@ class App extends React.Component{
             <div>
                 <BrowserRouter>
                 <Header/>
-                    <React.Fragment>
+                    <div className="container" style={{marginTop: '20px'}}>
                         <Route path="/" exact component={LandingPage}/>
                         <Route path="/surveys" exact component={Dashboard}/>
                         <Route path="/surveys/new" exact component={SurveyNew}/>
-                    </React.Fragment>
+                    </div>
                 </BrowserRouter>
             </div>
         )

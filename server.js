@@ -11,6 +11,7 @@ const app = express()
 
 //services 
 require('./modals/userModal')
+require('./modals/surveyModal')
 require('./config/passport')
 
 // env variables
@@ -44,7 +45,9 @@ app.use(passport.session())
 // routes
 require('./routes/authRoutes')(app)
 require('./routes/billingRoutes')(app)
+require('./routes/surveyRoutes')(app)
 
+// deployment configuration
 if(process.env.NODE_ENV === 'production'){
     // ensuring express serves production assets
     app.use(express.static('client/build'));
